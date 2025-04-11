@@ -1,8 +1,9 @@
 package service
 
 import (
-	"user-service/internal/domain"
-	"user-service/internal/repository"
+	"github.com/spookycoincidence/hx-user-service-demo/internal/repository"
+
+	"github.com/spookycoincidence/hx-user-service-demo/internal/domain"
 )
 
 type UserService interface {

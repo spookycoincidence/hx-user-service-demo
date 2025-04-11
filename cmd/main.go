@@ -1,36 +1,25 @@
 package main
 
 import (
-	"database/sql"
-	"fmt"
 	"log"
 	"net/http"
-	"user-service/config"
-	"user-service/internal/handler"
-	"user-service/internal/repository"
-	"user-service/internal/service"
+
+	"github.com/spookycoincidence/hx-user-service-demo/internal/handler"
+	"github.com/spookycoincidence/hx-user-service-demo/internal/repository"
+	"github.com/spookycoincidence/hx-user-service-demo/internal/service"
 
 	"github.com/gorilla/mux"
-	_ "github.com/lib/pq"
 )
 
 func main() {
-	cfg := config.LoadConfig()
-
-	db, err := sql.Open("postgres", cfg.GetDSN())
-	if err != nil {
-		log.Fatal("DB connection failed:", err)
-	}
-	defer db.Close()
-
-	userRepo := repository.NewUserRepository(db)
-	userService := service.NewUserService(userRepo)
+	mockRepo := repository.NewMockUserRepository()
+	userService := service.NewUserService(mockRepo)
 	userHandler := handler.NewUserHandler(userService)
 
 	r := mux.NewRouter()
 	r.HandleFunc("/users", userHandler.CreateUser).Methods("POST")
 	r.HandleFunc("/users/{id}", userHandler.GetUser).Methods("GET")
 
-	fmt.Println("User service running on port", cfg.Port)
-	log.Fatal(http.ListenAndServe(":"+cfg.Port, r))
+	log.Println("User service running on port 8080")
+	log.Fatal(http.ListenAndServe(":8080", r))
 }

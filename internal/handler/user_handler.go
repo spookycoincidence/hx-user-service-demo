@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
-	"user-service/internal/domain"
-	"user-service/internal/service"
+
+	"github.com/spookycoincidence/hx-user-service-demo/internal/domain"
+	"github.com/spookycoincidence/hx-user-service-demo/internal/service"
 
 	"github.com/gorilla/mux"
 )

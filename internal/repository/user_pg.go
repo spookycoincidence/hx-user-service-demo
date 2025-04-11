@@ -2,7 +2,8 @@ package repository
 
 import (
 	"database/sql"
-	"user-service/internal/domain"
+
+	"github.com/spookycoincidence/hx-user-service-demo/internal/domain"
 )
 
 type UserRepository interface {
