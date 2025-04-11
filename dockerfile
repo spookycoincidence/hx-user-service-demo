@@ -9,8 +9,9 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o out ./cmd
+RUN go build -o out .
 
 EXPOSE 8080
 
 CMD ["./out"]
+
